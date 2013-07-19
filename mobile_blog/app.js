@@ -73,7 +73,7 @@ app.post('/login', routes.doLogin);
 app.get('/logout', routes.checkLogin);
 app.get('/logout', routes.logout);
 
-
+// Oopen a web server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
