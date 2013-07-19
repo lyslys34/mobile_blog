@@ -54,6 +54,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
+// Add the related routes
 app.get('/', routes.index);
 app.get('/mobile', routes.mobile);
 app.get('/users', user.list);
