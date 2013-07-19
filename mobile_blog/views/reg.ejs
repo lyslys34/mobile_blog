@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %> - Microblog</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style type="text/css">
+    	body {
+    		padding-top: 60px;
+    		padding-bottom: 40px;
+    	}
+    </style>
+    <link rel='stylesheet' href="/stylesheets/bootstrap-responsive.css" />
+  </head>
+  <body>
+  	<% include header%>
+
+	
+	<div id="container" class="container">
+		<% if (locals.success) { %>
+      		<div class="alert alert-success">
+        		<%= locals.success %>
+      		</div>
+    	<% } %>
+    	<% if (locals.error) { %>
+      		<div class="alert alert-error">
+        		<%= locals.error %>
+			</div> 
+		<% } %>
+		<% include reg_form%>
+		<hr />
+  		<footer>
+  			<p><a href="http://www.byvoid.com" target="_blank">LYS</a> 2013</p>
+		</footer>			
+  </body>
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/bootstrap.js"></script>
+</html>

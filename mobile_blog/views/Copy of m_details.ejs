@@ -1,0 +1,14 @@
+<% if (items.length) { %>
+	<% items.forEach(function(item, index) { %>
+		<div id="details<%= index %>" data-dojo-type="dojox.mobile.ScrollableView">
+			<h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props='back:"Home", moveTo:"tweets"'>
+				<%= item.book.title %>
+			</h1>
+			<ul data-dojo-type="dojox.mobile.RoundRectList" data-dojo-props='variableHeight:true'>
+			    <li data-dojo-type="dojox.mobile.ListItem" data-dojo-props='icon:"<%= item.book.images.small %>"'>
+					<%= item.book.summary %>
+				</li>
+			</ul>
+		</div>
+	<%}) %>
+<%} %>

@@ -1,0 +1,7 @@
+<% if (items.length) { %>
+		<% items.forEach(function(item, index) { %>
+			<li data-dojo-type="dojox.mobile.ListItem" data-dojo-props='icon:"<%= item.book.images.small %>", moveTo:"details<%= index %>"'>
+				<%= item.book.title %>
+			</li>
+		<%}) %>
+<%} %>
