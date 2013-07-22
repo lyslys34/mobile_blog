@@ -38,8 +38,6 @@ app.use(flash());
 app.use(function(req, res, next){
 	  var error = req.flash('error');
 	  var success = req.flash('success');
-	  console.info("error:", error);
-	  console.info('success:', success);
 	  res.locals.user = req.session.user;
 	  res.locals.error = error.length ? error : null;
 	  res.locals.success = success.length ? success : null;
@@ -58,6 +56,7 @@ if ('development' == app.get('env')) {
 // Add the related routes
 app.get('/', routes.index);
 app.get('/mobile', routes.mobile);
+app.post('/mobile', routes.doMobile);
 app.get('/users', user.list);
 app.get('/u/:user', routes.user);
 app.post('/post', routes.checkLogin);
@@ -77,3 +76,10 @@ app.get('/logout', routes.logout);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+setInterval(function() {
+	console.info("Get data from DOUBAN and store in mongoDB");
+	DOUBAN.save(null, function(err) {
+		console.info("DOUBAN save err:", err);
+	});
+}, 30000);

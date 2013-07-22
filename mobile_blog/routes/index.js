@@ -12,11 +12,23 @@ exports.mobile = function(req, res) {
 		if (err) {
 			items = [];
 		}
-		items.shift();
+		console.info("DOUBAN data length:", items.length);
 		res.render('mobile', {
 			title: "Mobile",
 			layout: null,
 			items: items
+		});
+	});
+	
+};
+
+exports.doMobile = function(req, res) {
+	DOUBAN.get(null, function(err, items) {
+		if (err) {
+			items = [];
+		}
+		res.json({
+			DBItems: items
 		});
 	});
 	
@@ -92,11 +104,9 @@ exports.doReg = function(req, res) {
 	
 	// Check the username had already existed or not
 	User.get(newUser.name, function(err, user) {
-		console.info("routes index.js User.get user:", user);
 		if (user) {
 			err = 'Username already exists.';
 		}
-		console.info("routes index.js User.get err:", err);
 		if (err) {
 			req.flash('error', err);
 			return res.redirect('/reg');

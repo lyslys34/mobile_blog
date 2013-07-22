@@ -7,11 +7,26 @@
 		<!-- prevent cache -->
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="pragma" content="no-cache">
-		<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js" data-dojo-config="isDebug:1, async:1, parseOnLoad: true"></script>
+		<script src="/javascripts/jquery.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js" data-dojo-config="async:1"></script>
 		<script>
 			require(["dojox/mobile/parser", "dojox/mobile/deviceTheme", "dojox/mobile", "dojox/mobile/ScrollableView", "dojox/mobile/TabBar", "dojox/mobile/compat"],
 				function(parser) {
-					//parser.parse();
+					parser.parse();
+					
+					$(".tweetviewRefresh").click(function(e) {
+					   $.ajax({
+					       url: '/mobile',
+					       data: {data: "getDBBook"},
+					       type: 'POST',
+					       success: function(data) {
+					           console.info("ajax success callback data", data);
+					       },
+					       error: function(xhr, status, error) {
+					           console.log("Error:" + error.message);
+					       }
+					   });
+					});
 				}
 			);
 		</script>

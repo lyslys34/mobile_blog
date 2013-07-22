@@ -22,27 +22,20 @@ http.get(DBinfoUrl, function (res) {
 		    item;
 		
 		mongodb.open(function(err, db){
-			console.info("00000");
 			if (err) {
 				console.info("Open mongodb err:", err);
 				return;
 			}
-			console.info("111111");
-			db.collection('doubanData', function(err, collection) {
-				console.info("222222");
+			db.collection('DB_data', function(err, collection) {
 				if (err) {
 					mongodb.close();
-					console.info("Open db collection err:", err);
 					return;
 				}
-				console.info("3333333");
-				console.info(44444);
 				for (var i = 0; i < length; i++) {
 					item = collections[i];
-					collection.ensureIndex('id', {unique: true});
-					console.info("INsert beofre item:", item);
-					collection.insert(item, {safe:true}, function(err, item){
-						console.info(5555);
+					item['_id'] = item.id;
+					collection.ensureIndex('_id', {unique: true});
+					collection.save(item, {safe:true}, function(err, item){
 						if (err) {
 							console.info("Insert item into DB failed err:", err);
 						}
